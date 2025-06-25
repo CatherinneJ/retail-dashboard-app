@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Retail Dashboard Sony</title>
+</head>
+<body>
+  <header>
+  
+     <div class="left">
+            <img class="logo" src="/images/logo.jpg" alt="logo">
+        </div>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search product..." />
+      <button class="search-button" aria-label="Submit search">
+       <img class="search-icon" src="/images/search-button.png" alt="search-icon">
+      </button>
+    </div>
+
+  </header>
+
+  <main>
+<div class="hero-banner">
+  <img src="/images/banner.jpg" alt="woman" />
+</div>
+    <section id="product-gallery">
+      <div id="filter-bar">
+        <button class="filter-button" onclick="filterProducts('all')">All</button>
+        <button class="filter-button" onclick="filterProducts('headphones')">Headphones</button>
+        <button class="filter-button" onclick="filterProducts('speakers')">Speakers</button>
+        <button class="filter-button" onclick="filterProducts('watches')">Watches</button>
+        <button class="filter-button" onclick="filterProducts('camera')">Camera</button>
+      </div>
+
+      <h2>Products</h2>
+
+      <div id="products"></div>
+    </section>
+
+    <section id="cart">
+      <h2>Shopping cart</h2>
+      <ul id="cart-items"></ul>
+      <p>Total price: <span id="total-price">0 €</span></p>
+      <button onclick="checkout()">Checkout</button>
+    </section>
+
+    <section id="dashboard">
+      <h2>Sales chart</h2>
+      <canvas id="sales-chart"></canvas>
+      <div id="keywords"></div>
+    </section>
+
+    <section id="product-details" class="hidden">
+      <h2>Product detail</h2>
+      <div id="details-content"></div>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+  <script type="module" src="chart-visual.js"></script>
+</body>
+</html>
