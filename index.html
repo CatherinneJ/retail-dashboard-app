@@ -4,62 +4,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" href="path-to-your-icon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title>Retail Dashboard Sony</title>
 </head>
 <body>
   <header>
-  
-     <div class="left">
-            <img class="logo" src="/images/logo.jpg" alt="logo">
-        </div>
-    <div class="search-bar">
-      <input type="text" id="search-input" placeholder="Search product..." />
-      <button class="search-button" aria-label="Submit search">
-       <img class="search-icon" src="/images/search-button.png" alt="search-icon">
-      </button>
+  <div class="header-container">
+    <div class="left">
+           <img class="logo" src="/images/logo.jpg" alt="logo">
     </div>
-
+<div class="search-bar">
+  <div class="dropdown-wrapper">
+    <button type="button" id="category-button">All ▼</button>
+    <ul class="dropdown-menu hidden" id="category-menu">
+      <li data-category="all">All</li>
+      <li data-category="gaming">Gaming</li>
+      <li data-category="headband">Headband</li>
+      <li data-category="in-ear">In-ear</li>
+      <li data-category="truly-wireless">Truly-Wireless</li>
+    </ul>
+  </div>
+  <input type="text" id="search-input" placeholder="Search product..." />
+  <button id="search-button">
+    <i class="fas fa-search"></i>
+  </button>
+</div>
+    <div class="cart-icon" id="cart-button" onclick="toggleCart()">
+   <i class="fa-solid fa-cart-shopping"></i>
+   <span id="cart-count" class="cart-count">0</span>
+    </div>
+</div>
   </header>
 
+  <div class="hero-banner">
+    <img src="/images/banner.jpg" alt="woman" />
+    <h3 class="quote">“Music is a painting that one looks at with one’s ears.”</h3>
+  </div>
+
   <main>
-<div class="hero-banner">
-  <img src="/images/banner.jpg" alt="woman" />
-</div>
-    <section id="product-gallery">
-      <div id="filter-bar">
-        <button class="filter-button" onclick="filterProducts('all')">All</button>
-        <button class="filter-button" onclick="filterProducts('headphones')">Headphones</button>
-        <button class="filter-button" onclick="filterProducts('speakers')">Speakers</button>
-        <button class="filter-button" onclick="filterProducts('watches')">Watches</button>
-        <button class="filter-button" onclick="filterProducts('camera')">Camera</button>
-      </div>
+   <section id="product-gallery-container">
 
-      <h2>Products</h2>
+    <div id="filtr-bar">
+      <button class="filter-button" data-category="all">All</button>
+      <button class="filter-button" data-category="gaming">Gaming</button>
+      <button class="filter-button" data-category="headband">Headband</button>
+      <button class="filter-button" data-category="in-ear">In-ear</button>
+      <button class="filter-button" data-category="truly-wireless">Truly-Wireless</button>
+    </div>
 
+    <div class="product-area">
       <div id="products"></div>
-    </section>
-
-    <section id="cart">
-      <h2>Shopping cart</h2>
-      <ul id="cart-items"></ul>
-      <p>Total price: <span id="total-price">0 €</span></p>
-      <button onclick="checkout()">Checkout</button>
-    </section>
-
-    <section id="dashboard">
-      <h2>Sales chart</h2>
-      <canvas id="sales-chart"></canvas>
-      <div id="keywords"></div>
-    </section>
 
     <section id="product-details" class="hidden">
-      <h2>Product detail</h2>
-      <div id="details-content"></div>
-    </section>
-  </main>
+  <button id="close-details">✖</button>
+  <h2>Product detail</h2>
+  <div id="details-content"></div>
 
+  <div id="reviews">
+    <h3>Reviews</h3>
+    <ul id="reviews-list"></ul>
+  </div>
+
+  <div id="dashboard">
+    <h3>Sales chart</h3>
+    <canvas id="dashboard-sales-chart" width="400" height="200"></canvas>
+    <div id="keywords"></div>
+  </div>
+</section>
+
+
+<div id="cart" class="hidden">
+  <h2>Shopping cart</h2>
+  <ul id="cart-items" class="cart-items"></ul>
+  <p>Total price: <span id="total-price">0 €</span></p>
+  <button id="checkout-btn">Pay Now</button>
+</div>
+
+</main>
+<section>
+  <div id="pink-area">
+    <h1 id="text-pink">Your New Colour, Smoky Pink</h1>
+    <p class="pink-pink">A soft and sophisticated pink with an elegant and muted tone that blends with your personality. The powdery matte texture and nuanced colour with a slight pinkish tint add moderately brilliance while blending with your skin tone and fashion.</p>
+  </div>
+  <div class="pink-images">
+    <img src="/images/pink1.jpg" alt="pink"/>
+    <img src="/images/pink2.jpg" alt="pink2"/>
+  </div>
+</section>
+
+<section id="video-color">
+  <div>
+    <h1 id="text-pink">Our advanced noise cancelling gets even better</h1>
+    <p class="pink-pink">See how these Sony noise cancelling headphones combine our advanced noise cancelling technology with superlative sound for a truly remarkable listening experience.</p>
+  </div>
+ <video controls>
+  <source src="/video/sony.mp4" type="video/mp4">
+</video>
+</section>
+
+<section>
+  <div class="play-music">
+    <img src="/images/spotify.jpg" alt="tobuy" class="tobuy"/>
+      <img src="/images/playnow.jpg" alt="tobuy" class="tobuy"/>
+        <img src="/images/endel.jpg" alt="tobuy" class="tobuy"/>
+  </div>
+</section>
+
+  <div id="product-modal" class="modal hidden">
+    <div class="modal-content" id="modal-details">
+    </div>
+    <button class="close-button" id="close-modal">✖</button>
+  </div>
+  
+<footer>
+   <div class="footer-icons">
+                <div class="icon-bottom">
+                  <a href="https://pinterest.com" target="_blank"><i class="fa-brands fa-pinterest"></i></a>
+                  <a href="https://twitter.com" target="_blank"><i class="fa-brands fa-square-x-twitter"></i></a>
+                  <a href="https://youtube.com" target="_blank"><i class="fa-brands fa-square-youtube"></i></a>
+                    <a href="https://facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+</footer>
   <script type="module" src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="module" src="chart-visual.js"></script>
 </body>
 </html>
