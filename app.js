@@ -162,21 +162,10 @@ async function showDetails(id) {
       : 'No rating';
 
      const salesRes = await fetch(`/api/sales/${id}`);
-    let salesRawData = null;
-    if (salesRes.ok) {
-      salesRawData = await salesRes.json();
-    }
- 
-    let salesData = null;
-    if (salesRawData) {
-      const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May']; 
-      const datasets = Object.entries(salesRawData).map(([key, data], index) => ({
-        label: key.toUpperCase(),
-        data: data,
-        backgroundColor: `hsl(${index * 60}, 70%, 60%)`
-      }));
-      salesData = { labels, datasets };
-    }
+
+    const salesData = salesRes.ok ? await salesRes.json() : null;
+
+    console.log('Loading details for product ID:', id);
 
     const modal = document.getElementById('product-modal');
     const modalDetails = document.getElementById('modal-details');
@@ -205,16 +194,16 @@ async function showDetails(id) {
           <div class="reviews-info">
           <h4>Reviews:</h4>
           <ul class="description-product">
-            ${reviews.map(r => `<li>${r.rating}★ – ${r.comment}</li>`).join('')}
+            ${reviews.map(r => `<li>${r.rating}⭐ – ${r.comment}</li>`).join('')}
           </ul>
 
           <label><strong>Your review:</strong><br>
             <select id="rating">
-              <option value="1">1★</option>
-              <option value="2">2★</option>
-              <option value="3">3★</option>
-              <option value="4">4★</option>
-              <option value="5">5★</option>
+              <option value="1">1⭐</option>
+              <option value="2">2⭐</option>
+              <option value="3">3⭐</option>
+              <option value="4">4⭐</option>
+              <option value="5">5⭐</option>
             </select>
             </div>
             <textarea id="comment" rows="3" placeholder="Comment..."></textarea>
@@ -238,6 +227,13 @@ async function showDetails(id) {
       if (canvas) {
         const ctx = canvas.getContext('2d');
         if (salesChart) salesChart.destroy();
+
+      const gradient = ctx.createLinearGradient(0, 0, 0, 200);
+      gradient.addColorStop(0, 'rgb(190, 32, 185)');
+      gradient.addColorStop(1, 'rgb(242, 50, 88)');
+
+  salesData.datasets[0].backgroundColor = gradient;
+
         salesChart = new Chart(ctx, {
           type: 'bar',
           data: salesData,
